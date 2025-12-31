@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "database": {
+    "name": "vfdb",
+    "category": "Some additional description that can be placed on a website"
+  },
+  "environment": {
+    "workspace": "/mnt/raid/external_databases/staging/2025-12-23/vfdb",
+    "user": "jenkins",
+    "container_image": "plepiseq-wgs:2.1.0",
+    "host": "compute01"
+  },
+  "started_at": "2025-12-23T12:42:00Z",
+  "finished_at": "2025-12-23T12:53:30Z",
+  "runtime_seconds": 690,
+  "run_status": "FAIL",
+  "update_status": {
+    "mode": "none",
+    "status": "update_not_applicable",
+    "status_message": "Update not avaialble"
+  },
+  "source": {
+    "source_type": "https",
+    "base_url": "https://www.mgc.ac.cn/VFs/",
+    "files": [
+      "VFDB_setB_nt.fas.gz",
+      "VFs.xls.gz"
+    ]
+  },
+  "log_path": "/mnt/raid/external_databases/staging/2025-12-23/vfdb/log.log",
+  "milestones": [
+    {
+      "name": "PREFLIGHT_CONNECTIVITY",
+      "status": "PASSED",
+      "started_at": "2025-12-23T12:42:01Z",
+      "finished_at": "2025-12-23T12:42:03Z",
+      "attempts": 1,
+      "retryable": true,
+      "message": "Internet connectivity OK.",
+      "metrics": {
+        "dns_ok": true,
+        "https_ok": true
+      }
+    },
+    {
+      "name": "SOURCE_AVAILABILITY",
+      "status": "FAILED",
+      "started_at": "2025-12-23T12:42:03Z",
+      "finished_at": "2025-12-23T12:53:20Z",
+      "attempts": 3,
+      "retryable": true,
+      "message": "Upstream unavailable after retries; aborting.",
+      "metrics": {
+        "attempt_http_statuses": [
+          503,
+          503,
+          503
+        ],
+        "retry_backoff_seconds": [
+          60,
+          120
+        ]
+      }
+    },
+    {
+      "name": "COMPLETE",
+      "status": "FAILED",
+      "started_at": "2025-12-23T12:53:20Z",
+      "finished_at": "2025-12-23T12:53:30Z",
+      "attempts": 1,
+      "retryable": false,
+      "message": "Run terminated safely before download/build."
+    }
+  ]
+}

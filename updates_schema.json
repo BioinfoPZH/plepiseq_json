@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/db_update_run_report.schema.json",
+  "title": "Database Update Run Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "database",
+    "environment",
+    "started_at",
+    "finished_at",
+    "runtime_seconds",
+    "run_status",
+    "update_status",
+    "source",
+    "log_path",
+    "milestones"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this reporting schema (not the database).",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "database": {
+      "$ref": "#/$defs/database_identity"
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Field grouping environment related keys. Who and where run the update.",
+      "required": [
+        "workspace",
+        "user",
+        "container_image",
+        "host"
+      ],
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Additional property - TBD.",
+          "enum": [
+            "TBD"
+          ]
+        },
+        "workspace": {
+          "type": "string",
+          "description": "Path to the database."
+        },
+        "user": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "container_image": {
+          "type": "string"
+        }
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO8601 timestamp recommended."
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "runtime_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "run_status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL"
+      ],
+      "description": "High-level status. PASS - database was successfully downloaded/updated. FAIL - database was not successfully downloaded/updated."
+    },
+    "update_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Fields describing if update are available for this database, update check and status",
+      "required": [
+        "mode",
+        "status",
+        "status_message"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "checksum_manifest",
+            "remote_metadata",
+            "remote_manifest",
+            "etag_last_modified",
+            "version_endpoint",
+            "directory_listing_diff",
+            "none",
+            "always_update"
+          ],
+          "description": "Name of the updating mechanism.Initial version"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "update_performed",
+            "update_not_applicable",
+            "latest_version_present",
+            "error"
+          ],
+          "description": "Status of the update task"
+        },
+        "status_message": {
+          "type": "string",
+          "description": " Any information returned during update phase e.g. if md5sum were compared."
+        }
+      }
+    },
+    "source": {
+      "$ref": "#/$defs/source",
+      "description": "Basic information on database sources, location, expected files."
+    },
+    "log_path": {
+      "type": "string",
+      "description": "path to a log file  file for this database update"
+    },
+    "milestones": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/milestone"
+      },
+      "description": "Ordered list of steps the updater attempted."
+    }
+  },
+  "$defs": {
+    "database_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Database description. For now, only the name is required. Category is left as a placeholder for new fields.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "examples": [
+            "vfdb",
+            "cgmlst",
+            "kraken2_db"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "description": "Optional field added to database_identity",
+          "examples": [
+            "virulence",
+            "Some interesting text"
+          ]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "base_url",
+        "files"
+      ],
+      "properties": {
+        "source_type": {
+          "description": " database source resource e.h. webserwis, s3, git",
+          "type": "string",
+          "enum": [
+            "https",
+            "ftp",
+            "s3",
+            "git",
+            "rsync",
+            "local"
+          ]
+        },
+        "base_url": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "description": "List of files used to verify database integrity"
+        }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "PREFLIGHT_CONNECTIVITY",
+            "SOURCE_AVAILABILITY",
+            "LOAD_PREVIOUS_STATE",
+            "DOWNLOAD",
+            "INTEGRITY_CHECK",
+            "CHANGE_DETECTION",
+            "STAGING_PREPARE",
+            "UNPACK",
+            "BUILD_TRANSFORM",
+            "INDEX_BUILD",
+            "SMOKE_VALIDATE",
+            "WRITE_MANIFEST",
+            "PROMOTION_READY",
+            "COMPLETE"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "STARTED",
+            "PASSED",
+            "FAILED",
+            "SKIPPED",
+            "RETRYING"
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "retryable": {
+          "type": "boolean",
+          "default": false
+        },
+        "message": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Optional numeric/structured metrics: files_processed, bytes, counts, timings."
+        }
+      }
+    }
+  }
+}
