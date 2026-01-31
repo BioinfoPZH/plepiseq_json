@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/db_update_run_report.schema.v1.1.0.json",
-  "title": "Database Update Run Report",
+  "title": "Database Update Run Report V. 1.1.1",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -23,7 +23,7 @@
       "type": "string",
       "description": "Version of this JSON report schema.",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
-      "examples": ["1.1.0"]
+      "examples": ["1.1.1"]
     },
 
     "database": {
@@ -130,7 +130,12 @@
         "version_remote": {
           "type": "string",
           "description": "Remote database version string."
-        }
+        },
+        "first_build": {
+          "type": "boolean",
+          "default": false,
+          "description": "True if there was no local checksum baseline at the start (e.g., missing manifest). When true, checksums_before may be an empty list."
+}
       },
       "allOf": [
         {
