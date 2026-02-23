@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.1.1",
+  "database": {
+    "name": "vfdb",
+    "category": "Some additional description that can be placed on a website"
+  },
+  "execution_context": {
+    "workspace": "/mnt/raid/external_databases/staging/2025-12-23/vfdb",
+    "user": "jenkins",
+    "container_image": "plepiseq-wgs:2.1.0",
+    "host": "compute01"
+  },
+  "run_id": "Uniqueid",
+  "started_at": "2025-12-23T12:42:00Z",
+  "finished_at": "2025-12-23T12:53:30Z",
+  "runtime_seconds": 690,
+  "run_status": "FAIL",
+  "update_decision": {
+    "mode": "always_rebuild",
+    "result": "always_rebuild",
+    "message": "Update check not applicable; database is rebuilt from scratch.",
+    "first_build": false,
+    "checksums_before": [],
+    "checksums_after": [
+      {
+        "file_name": "a.fastq.gz",
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+      }
+    ]
+  },
+  "source": {
+    "source_type": "https",
+    "reference": "https://www.mgc.ac.cn/VFs/",
+    "expected_raw_files": [
+      "VFDB_setB_nt.fas.gz",
+      "VFs.xls.gz"
+    ],
+    "expected_processed_files": [
+      "ala.fasta"
+    ]
+  },
+  "log_file": "/mnt/raid/external_databases/staging/2025-12-23/vfdb/log.log",
+  "milestones": [
+    {
+      "name": "PREFLIGHT_CONNECTIVITY",
+      "status": "PASSED",
+      "started_at": "2025-12-23T12:42:01Z",
+      "finished_at": "2025-12-23T12:42:03Z",
+      "attempts": 1,
+      "retryable": true,
+      "message": "Internet connectivity OK.",
+      "metrics": {
+        "dns_ok": true,
+        "https_ok": true
+      }
+    }
+  ],
+  "error": {
+    "code": "UPSTREAM_UNAVAILABLE",
+    "message": "Database endpoint not reachable during availability check.",
+    "retry_recommended": true
+  }
+}
