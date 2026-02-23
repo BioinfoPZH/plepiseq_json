@@ -12,7 +12,7 @@
         "enum": [
           "kraken2",
           "metaphlan",
-          "kmerfinder"
+          "speciesfinder"
         ],
         "$comment": "Nazwa programu stosowanego do predykcji zanieczyszczen. Wymagany."
       },
@@ -75,7 +75,7 @@
         "type": "number",
         "multipleOf": 0.01,
         "minimum": 0,
-        "$comment": "Hipotetyczne pokrycie dla najczesciej wystepujacego gatunku (species) zidentyfikowanego w probce. Podawane z dokladnoscia dwoch miejsc dziesietnych. Wymagany, jesli program to kmerfinder i status to tak."
+        "$comment": "Hipotetyczne pokrycie dla najczesciej wystepujacego gatunku (species) zidentyfikowanego w probce. Podawane z dokladnoscia dwoch miejsc dziesietnych. Wymagany, jesli program to speciesfinder i status to tak."
       },
       "secondary_species_value": {
         "type": "number",
@@ -88,7 +88,7 @@
         "type": "number",
         "multipleOf": 0.01,
         "minimum": 0,
-        "$comment": "Hipotetyczne pokrycie dla drugiego najczesciej wystepujacego gatunku (species) zidentyfikowanego w probce. Podawane z dokladnoscia dwoch miejsc dziesietnych. Wymagany, jesli program to kmerfinder i status to tak."
+        "$comment": "Hipotetyczne pokrycie dla drugiego najczesciej wystepujacego gatunku (species) zidentyfikowanego w probce. Podawane z dokladnoscia dwoch miejsc dziesietnych. Wymagany, jesli program to speciesfinder i status to tak."
       }
     },
     "required": [
@@ -117,7 +117,7 @@
               "if": {
                 "properties": {
                   "program_name": {
-                    "const": "kmerfinder"
+                    "const": "speciesfinder"
                   }
                 }
               },

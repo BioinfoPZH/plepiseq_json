@@ -12,7 +12,7 @@
     "secondary_species_value": 10.92
   },
   {
-    "program_name": "kmerfinder",
+    "program_name": "speciesfinder",
     "status": "tak",
     "main_species_name": "Salmonella",
     "secondary_species_name": "Homo",
