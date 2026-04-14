@@ -2,6 +2,17 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Subschema for plepiseq output, RSV specific data",
   "$comment": "Schemat dla outputu, informacje specyficzne dla wirusa RSV",
+  "$defs": {
+    "rsv_mutation_name": {
+      "type": "string",
+      "pattern": "^[A-Z]\\d+[A-Z](\\+[A-Z]\\d+[A-Z])*$",
+      "$comment": "Substytucja aminokwasowa: jedna lub więcej par (aminokwas referencyjny + pozycja + aminokwas w próbce), warianty łączone znakiem '+'. Litery wielkie (jednoliterowe kody AA).",
+      "examples": [
+        "K209R",
+        "N67I+N208Y"
+      ]
+    }
+  },
   "type": "object",
   "properties": {
     "type": {
@@ -59,12 +70,7 @@
               "type": "object",
               "properties": {
                 "mutation_name": {
-                  "type": "string",
-                  "$comment": "Nazwa mutacji (lub kombinacja mutacji oddzielona znakiem '+')",
-                  "examples": [
-                    "K209R",
-                    "N67I+N208Y"
-                  ]
+                  "$ref": "#/$defs/rsv_mutation_name"
                 },
                 "mutation_effect": {
                   "type": "string",
@@ -91,12 +97,7 @@
               "type": "object",
               "properties": {
                 "mutation_name": {
-                  "type": "string",
-                  "$comment": "Nazwa mutacji (lub kombinacja mutacji oddzielona znakiem '+')",
-                  "examples": [
-                    "K209R",
-                    "N67I+N208Y"
-                  ]
+                  "$ref": "#/$defs/rsv_mutation_name"
                 },
                 "mutation_effect": {
                   "type": "string",
