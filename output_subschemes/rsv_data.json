@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Subschema for plepiseq output, RSVspecific data",
-  "$comment": "Schemat dla outputu, informacja specyficzne dla wirusa RSV",
+  "title": "Subschema for plepiseq output, RSV specific data",
+  "$comment": "Schemat dla outputu, informacje specyficzne dla wirusa RSV",
   "type": "object",
   "properties": {
     "type": {
@@ -11,10 +11,145 @@
         "B",
         "unk"
       ],
-      "$comment": "Informacja o typie wirusa grypy zidentyfikowanego w próbce, 'unk' w przypadku problemu z okresleniem podtypu. Wymagany."
+      "$comment": "Informacja o typie wirusa RSV zidentyfikowanego w próbce, 'unk' w przypadku problemu z określeniem podtypu. Wymagany."
+    },
+    "resistance_status": {
+      "type": "string",
+      "enum": [
+        "tak",
+        "nie",
+        "blad"
+      ],
+      "$comment": "Informacja czy moduł Nextflow odpowiedzialny za analizę oporności wykonał się poprawnie. Wymagany."
+    },
+    "resistance_error_message": {
+      "type": "string",
+      "minLength": 1,
+      "$comment": "Dowolny tekst zwracany jako komunikat błędu podczas obliczeń. Wymagany, jeśli resistance_status jest inny niż tak."
+    },
+    "resistance_data": {
+      "type": "array",
+      "minItems": 0,
+      "$comment": "Informacja o występowaniu mutacji w białku F powodujących oporność na przeciwciała monoklonalne stosowane w profilaktyce RSV. Wymagany jeśli resistance_status to tak.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "drug_name": {
+            "type": "string",
+            "enum": [
+              "Nirsevimab",
+              "Palivizumab"
+            ],
+            "$comment": "Nazwa przeciwciała monoklonalnego. Wymagany."
+          },
+          "drug_resistance_status": {
+            "type": "string",
+            "enum": [
+              "resistance",
+              "possible_resistance",
+              "no_impact"
+            ],
+            "$comment": "Ogólny status oporności na dany lek. W przypadku wielu mutacji oporność determinowana jest mutacją o największym efekcie. Wymagany."
+          },
+          "mutation_list_data": {
+            "type": "array",
+            "minItems": 0,
+            "$comment": "Lista mutacji zidentyfikowanych w białku F próbki. Pozycja mutacji jest określona według numeracji w sekwencji białka F z próbki.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mutation_name": {
+                  "type": "string",
+                  "$comment": "Nazwa mutacji (lub kombinacja mutacji oddzielona znakiem '+')",
+                  "examples": [
+                    "K209R",
+                    "N67I+N208Y"
+                  ]
+                },
+                "mutation_effect": {
+                  "type": "string",
+                  "enum": [
+                    "resistance",
+                    "possible_resistance",
+                    "no_impact"
+                  ],
+                  "$comment": "Efekt konkretnej mutacji lub kombinacji mutacji."
+                }
+              },
+              "required": [
+                "mutation_name",
+                "mutation_effect"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "mutation_list_data_reference_numbering": {
+            "type": "array",
+            "minItems": 0,
+            "$comment": "Lista mutacji zidentyfikowanych w białku F próbki w odniesieniu do numeracji referencyjnej sekwencji białka F.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mutation_name": {
+                  "type": "string",
+                  "$comment": "Nazwa mutacji (lub kombinacja mutacji oddzielona znakiem '+')",
+                  "examples": [
+                    "K209R",
+                    "N67I+N208Y"
+                  ]
+                },
+                "mutation_effect": {
+                  "type": "string",
+                  "enum": [
+                    "resistance",
+                    "possible_resistance",
+                    "no_impact"
+                  ],
+                  "$comment": "Efekt konkretnej mutacji lub kombinacji mutacji."
+                }
+              },
+              "required": [
+                "mutation_name",
+                "mutation_effect"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "drug_name",
+          "drug_resistance_status",
+          "mutation_list_data",
+          "mutation_list_data_reference_numbering"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [
-    "type"
+    "type",
+    "resistance_status"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resistance_status": {
+            "const": "tak"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resistance_data"
+        ]
+      },
+      "else": {
+        "required": [
+          "resistance_error_message"
+        ]
+      }
+    }
   ]
 }
