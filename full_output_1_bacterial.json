@@ -8,6 +8,7 @@
     "ExecutionDir_dir": "/mnt/sda1/michall/RSV/tmp_sars/",
     "genome_files_data": {
       "status": "tak",
+      "genome_file_merged": "pipeline_wyniki/S3_S5_L001/S3_S5_L001.fasta",
       "file_data": [
         {
           "segment_name": "NODE1_pilon_pilon_pilon_cov_20.862722668721787",
