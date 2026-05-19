@@ -1,7 +1,24 @@
+## plepiseq_json
+
+JSON schemas for the PLepiSeq multiverse of pipelines. This repository stores
+the output schemas for the following components:
+
+- **WGS pipeline** — bacterial and viral whole-genome sequencing analysis
+  (`main_input_schema.json`, `main_output_schema.json`)
+- **Phylogenetic pipeline** — phylogenetic analysis
+  (`main_output_schema_phylogenetics.json`)
+- **External Database downloading pipeline** — schema for database update tracking
+  (`updates_schema.json`)
+
+### Validation
+
 Python script requires "fastjsonschema", to install just type "pip install fastjsonschema".
-To evaluate json against prepared schema type
-python scheme_validation.py <schema> <your json>, e.g.
-# for "bectrial" pipeline output
-python scheme_validation.py main_input_schema.json full_output_1_bacterial.json
-# for "viral" pipeline output
-python scheme_validation.py main_output_schema.json full_output_2_viral.json
+To evaluate json against prepared schema type:
+
+    python scheme_validation.py <schema> <your json>
+
+For example:
+
+
+    # WGS pipeline — viral output
+    python scheme_validation.py main_output_schema.json full_output_2_viral.json

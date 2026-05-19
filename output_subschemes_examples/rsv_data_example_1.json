@@ -1,3 +1,36 @@
 {
-  "type": "A"
+  "type": "A",
+  "resistance_status": "tak",
+  "resistance_data": [
+    {
+      "drug_name": "Nirsevimab",
+      "drug_resistance_status": "resistance",
+      "mutation_list_data": [
+        {
+          "mutation_name": "K209R",
+          "mutation_effect": "possible_resistance"
+        },
+        {
+          "mutation_name": "N67I+N208Y",
+          "mutation_effect": "resistance"
+        }
+      ],
+      "mutation_list_data_reference_numbering": [
+        {
+          "mutation_name": "K212R",
+          "mutation_effect": "possible_resistance"
+        },
+        {
+          "mutation_name": "N70I+N211Y",
+          "mutation_effect": "resistance"
+        }
+      ]
+    },
+    {
+      "drug_name": "Palivizumab",
+      "drug_resistance_status": "no_impact",
+      "mutation_list_data": [],
+      "mutation_list_data_reference_numbering": []
+    }
+  ]
 }
