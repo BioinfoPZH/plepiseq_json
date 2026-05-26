@@ -160,6 +160,24 @@
                     "type": "string",
                     "minLength": 1,
                     "$comment": "Sciezka do sekwencji segmentu. Wymagany."
+                  },
+                  "total_length_value": {
+                    "type": "number",
+                    "multipleOf": 1,
+                    "minimum": 0,
+                    "$comment": "Dlugosc sekwencji segmentu. Opcjonalny, raportowany tylko dla wirusow."
+                  },
+                  "number_of_Ns_value": {
+                    "type": "number",
+                    "multipleOf": 1,
+                    "minimum": 0,
+                    "$comment": "Ilosc nukleotydow N w segmencie. Opcjonalny, raportowany tylko dla wirusow."
+                  },
+                  "number_of_ambiguous_value": {
+                    "type": "number",
+                    "multipleOf": 1,
+                    "minimum": 0,
+                    "$comment": "Ilosc niejednoznacznych nukleotydow (kody IUPAC R, Y, S, W, K, M, B, D, H, V) w segmencie, bez wliczania N. Opcjonalny, raportowany tylko dla wirusow"
                   }
                 },
                 "required": [

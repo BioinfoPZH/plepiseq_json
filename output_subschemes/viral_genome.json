@@ -35,6 +35,12 @@
       "minimum": 0,
       "comment": "Ilosc nieokreslonych nukleotydow zidentyfikowana w genomie."
     },
+    "number_of_ambiguous_value": {
+      "type": "number",
+      "multipleOf": 1,
+      "minimum": 0,
+      "comment": "Ilosc niejednoznacznych nukleotydow (kody IUPAC R, Y, S, W, K, M, B, D, H, V) zidentyfikowanych w genomie. Nukleotydy oznaczone jako N nie sa wliczane do tej wartosci."
+    },
     "coverage_histogram_file": {
       "type": "string",
       "minLength": 1,
@@ -128,6 +134,7 @@
           "total_length_value",
           "average_coverage_value",
           "number_of_Ns_value",
+          "number_of_ambiguous_value",
           "coverage_histogram_file",
           "coverage_barplot_data",
           "primer_usage_data"
