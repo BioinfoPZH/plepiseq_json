@@ -3,6 +3,7 @@
   "total_length_value": 1234,
   "average_coverage_value": 100.34,
   "number_of_Ns_value": 34,
+  "number_of_ambiguous_value": 5,
   "coverage_histogram_file": "/path/to/a/file",
 
   "coverage_barplot_data": [

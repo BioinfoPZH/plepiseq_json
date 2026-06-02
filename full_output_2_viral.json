@@ -16,11 +16,17 @@
       "file_data": [
         {
           "segment_name": "NODE1_pilon_pilon_pilon_cov_20.862722668721787",
-          "segment_file": "pipeline_wyniki/S3_S5_L001/fastas/NODE1_pilon_pilon_pilon_cov_20.862722668721787.fasta"
+          "segment_file": "pipeline_wyniki/S3_S5_L001/fastas/NODE1_pilon_pilon_pilon_cov_20.862722668721787.fasta",
+          "total_length_value": 800,
+          "number_of_Ns_value": 20,
+          "number_of_ambiguous_value": 3
         },
         {
           "segment_name": "NODE2_pilon_pilon_pilon_cov_21.93405076896538",
-          "segment_file": "pipeline_wyniki/S3_S5_L001/fastas/NODE2_pilon_pilon_pilon_cov_21.93405076896538.fasta"
+          "segment_file": "pipeline_wyniki/S3_S5_L001/fastas/NODE2_pilon_pilon_pilon_cov_21.93405076896538.fasta",
+          "total_length_value": 434,
+          "number_of_Ns_value": 14,
+          "number_of_ambiguous_value": 2
         }
       ]
     },
@@ -66,6 +72,7 @@
       "total_length_value": 1234,
       "average_coverage_value": 100.34,
       "number_of_Ns_value": 34,
+      "number_of_ambiguous_value": 5,
       "coverage_histogram_file": "/path/to/a/file",
       "coverage_barplot_data": [
         {
