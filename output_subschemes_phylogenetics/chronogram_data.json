@@ -3,7 +3,7 @@
   "$id": "https://raw.githubusercontent.com/michallaz/plepiseq_json/main/output_subschemes_phylogenetics/chronogram_data_map.json",
   "title": "Chronogram data",
   "type": "object",
-  "description": "Struktura: { segment_name: { id_chronogram, augur_version, treetime_version, clockrate_value, clockrate_correlation } }.",
+  "description": "Struktura: { segment_name: { id_chronogram, augur_version, treetime_version, clockrate_value, clockrate_correlation, clockrate_warning } }.",
   "patternProperties": {
     "^\\S+$": {
       "type": "object",
@@ -40,6 +40,11 @@
           "minimum": -1,
           "maximum": 1,
           "$comment": "Liczba z zakresu 0-1, wartosc -1 oznacza ze user podal wlasny clockrate i korelacja nie byla liczona"
+        },
+        "clockrate_warning": {
+          "description": "Ostrzeżenie wyjaśniające, dlaczego zamiast wartości oszacowanej z danych użyto wbudowanego clockrate. Pusty ciąg znaków oznacza brak zastrzeżeń.",
+          "type": "string",
+          "$comment": "Pole opcjonalne, nieobecne w wynikach pipeline starszych niz 1.4.0. Niepuste gdy wszystkie probki maja te sama date pobrania, gdy korelacja sygnalu czasowego jest ponizej 0.5 albo gdy treetime clock zakonczyl sie bledem"
         }
       },
       "required": [

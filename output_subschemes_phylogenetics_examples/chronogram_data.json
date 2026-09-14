@@ -4,6 +4,7 @@
     "augur_version": "30.0.0",
     "treetime_version": "0.11.4",
     "clockrate_value": 1.12e-3,
-    "clockrate_correlation": 0.06
+    "clockrate_correlation": 0.06,
+    "clockrate_warning": "Weak temporal signal, the root-to-tip correlation r^2 = 0.06 is below 0.5. The built-in rate for rsv (1.12e-3) was used instead of the estimated one."
   }
 }
